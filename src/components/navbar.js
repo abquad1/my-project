@@ -1,0 +1,56 @@
+import { Link } from "react-router-dom";
+import "./navbar.css"
+import React, { useState } from "react";
+import { FaBars } from "react-icons/fa"
+import { FaTimes } from "react-icons/fa"
+
+
+const Navbar = () => {
+
+const [click, setClick] = useState(false);
+const handleClick = () => setClick(!click)
+
+const { color, setColor }= useState(false);
+
+const ChangeColor = () => {
+    if(window.scrollY >=100){
+        setColor(true);
+    } else{
+        setColor(false)
+    }
+};
+
+window.addEventListener("scroll", ChangeColor);
+    return(
+        <div className={color ? "header header-bg" : "header"}>
+            <Link to="/">
+            <h1> Portfolio </h1>
+            </Link>
+
+            <ul className={click ? "nav-menu active" : "nav-menu"}>
+                <li>
+                    <Link to="/"> Home</Link>
+                </li>
+
+                <li>
+                    <Link to="/Project"> Project</Link>
+                </li>
+
+                <li>
+                    <Link to="/About"> About</Link>
+                </li>
+
+                <li>
+                    <Link to="/Contact"> Contact</Link>
+                </li>
+            </ul>
+
+            <div className="hamburger" onClick={handleClick}>
+                {click ? ( <FaTimes className="icon"/>
+                ): (<FaBars className="icon" />) }
+            </div>
+        </div>
+    )
+}
+
+export default Navbar; 
